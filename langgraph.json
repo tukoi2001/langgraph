@@ -1,0 +1,9 @@
+{
+  "dockerfile_lines": [],
+  "python_version": "3.12",
+  "env": ".env",
+  "dependencies": ["."],
+  "graphs": {
+    "news_aggregator": "news_aggregator.agent:app"
+  }
+}

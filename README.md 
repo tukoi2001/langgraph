@@ -1,0 +1,45 @@
+# Đề số 3: Tự động tổng hợp tin tức theo chủ đề.
+## Yêu cầu:
+
+Xây dựng hệ thống tự động thu thập, tổng hợp tin tức theo chủ đề (ví dụ: công nghệ, giáo dục) từ nhiều nguồn RSS hoặc website.
+Dùng LangChain để lọc, tóm tắt thông tin.
+Sử dụng LangSmith để kiểm thử và giám sát chất lượng tóm tắt.
+
+## Công nghệ sử dụng:
+
+LangChain (Thu thập dữ liệu web, Tóm tắt)
+LangSmith (Đánh giá, Giám sát)
+
+## Đầu ra:
+
+Source code hoàn chỉnh
+File tổng hợp tin tức theo chủ đề (txt, csv)
+Báo cáo thử nghiệm hiệu quả
+
+# Setup library:
+```bash
+$ python3.12 -m venv .venv
+$ source .venv/bin/activate
+$ python3.12 -m pip install --upgrade pip
+# Install the package in editable mode
+$ pip install -r requirements.txt
+# Run in dev tool
+$ pip install -U "langgraph-cli[inmem]"
+$ langgraph dev
+```
+
+# Setup env:
+```bash
+# Copy file env and input value
+LANGSMITH_API_KEY=
+LANGSMITH_TRACING=
+LANGSMITH_PROJECT=
+LANGCHAIN_API_KEY=
+LANGSMITH_ENDPOINT=
+OPENAI_API_KEY=
+CUSTOM_BASE_URL=
+```
+
+# Author:
+### Tran Xuan Tu (TuTX7)
+NO COPY
