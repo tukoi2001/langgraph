@@ -272,8 +272,8 @@ class NewsAggregator:
         self.llm = ChatOpenAI(
             model=Config.OPENAI_MODEL,
             temperature=Config.OPENAI_TEMPERATURE,
-            openai_api_key=Config.OPENAI_API_KEY,
-            openai_api_base=Config.CUSTOM_BASE_URL,
+            openai_api_key=Config.OPENAI_API_KEY,  # type: ignore
+            openai_api_base=Config.CUSTOM_BASE_URL,  # type: ignore
         )
         self.crawler = WebsiteCrawler()
         self.articles = []
@@ -286,9 +286,9 @@ class NewsAggregator:
             feed = feedparser.parse(url)
             if feed.entries:
                 print(f"  ✅ RSS hợp lệ! Tìm thấy {len(feed.entries)} bài viết")
-                print(f"  📰 Tiêu đề feed: {feed.feed.get('title', 'N/A')}")
+                print(f"  📰 Tiêu đề feed: {feed.feed.get('title', 'N/A')}")  # type: ignore
                 if feed.entries:
-                    print(f"  📝 Bài đầu tiên: {feed.entries[0].get('title', 'N/A')[:60]}...")
+                    print(f"  📝 Bài đầu tiên: {feed.entries[0].get('title', 'N/A')[:60]}...")  # type: ignore
                 return True
             else:
                 print(f"  ❌ Không phải RSS feed hoặc không có bài viết")
@@ -332,7 +332,7 @@ class NewsAggregator:
                     print(f"  ⚠️ Không có bài viết nào")
                     continue
                 
-                source_name = feed.feed.get("title", url)
+                source_name = feed.feed.get("title", url)  # type: ignore
                 count = 0
                 
                 for entry in feed.entries[:Config.MAX_ARTICLES_PER_SOURCE]:
@@ -406,7 +406,7 @@ class NewsAggregator:
                     "title": article['title'],
                     "summary": article['summary'][:500]
                 })
-                if "CÓ LIÊN QUAN" in result.content.upper():
+                if "CÓ LIÊN QUAN" in result.content.upper():  # type: ignore
                     filtered_articles.append(article)
                     source_icon = "📡" if article.get('source_type') == 'rss' else "🌐"
                     print(f"[{idx}/{len(articles)}] ✅ {source_icon} Giữ: {article['title'][:60]}...")
@@ -483,7 +483,7 @@ class NewsAggregator:
         }).content
         
         print("\n✅ Hoàn thành tóm tắt")
-        return summary
+        return summary  # type: ignore
     
     def evaluate_quality(self, summary: str, articles: List[Dict]) -> Dict:
         """Đánh giá chất lượng tóm tắt sử dụng LangSmith"""
@@ -540,13 +540,13 @@ class NewsAggregator:
             }).content
             
             # Trích xuất JSON
-            start_idx = result.find('{')
-            end_idx = result.rfind('}') + 1
+            start_idx = result.find('{')  # type: ignore
+            end_idx = result.rfind('}') + 1  # type: ignore
             if start_idx == -1 or end_idx == 0:
                 raise ValueError("Không tìm thấy JSON trong kết quả")
             
             json_str = result[start_idx:end_idx]
-            evaluation = json.loads(json_str)
+            evaluation = json.loads(json_str)  # type: ignore
             
             # In kết quả
             print(f"\n📊 KẾT QUẢ ĐÁNH GIÁ:")
